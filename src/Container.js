@@ -1,4 +1,6 @@
 import FrequencyChart from './Examples/FrequencyChart';
+import AsteroidMap from './Examples/AsteroidMap';
+import testdata from './testdata';
 const React = require('react');
 
 class Container extends React.Component {
@@ -45,11 +47,13 @@ class Container extends React.Component {
   render() {
     return (
       <div>
+        <p>Hello world</p>
         <FrequencyChart
           width={this.state.width}
           height={this.state.height}
           data={this.state.data}
         />
+        <AsteroidMap data={testdata} />
       </div>
     );
   }

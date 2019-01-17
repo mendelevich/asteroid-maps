@@ -1,6 +1,6 @@
-var React = require('react');
-var ReactFauxDOM = require('react-faux-dom');
-var d3 = require('d3');
+const React = require('react');
+const ReactFauxDOM = require('react-faux-dom');
+const d3 = require('d3');
 
 class FrequencyChart extends React.Component {
   drawChart() {
