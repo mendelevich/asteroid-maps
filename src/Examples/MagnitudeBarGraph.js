@@ -2,7 +2,7 @@ const React = require('react');
 const ReactFauxDOM = require('react-faux-dom');
 const d3 = require('d3');
 
-class AsteroidMap extends React.Component {
+class MagnitudeBarGraph extends React.Component {
   drawChart() {
     const div = new ReactFauxDOM.createElement('div');
 
@@ -10,8 +10,8 @@ class AsteroidMap extends React.Component {
     const asteroidList = data.near_earth_objects['2015-09-08'];
     const magnitude = asteroidList.map(x => x.absolute_magnitude_h);
 
-    const w = 960;
-    const h = 600;
+    const w = 600;
+    const h = 250;
     const padding = 4;
 
     console.log(magnitude);
@@ -27,10 +27,24 @@ class AsteroidMap extends React.Component {
       .data(magnitude)
       .enter()
       .append('rect')
-      .attr('x', (d, i) => i * (w / data.length))
-      .attr('y', d => h - d)
-      .attr('width', w / data.length - padding)
-      .attr('height', d => d);
+      .attr('x', (d, i) => i * (w / magnitude.length))
+      .attr('y', d => h - d * 4)
+      .attr('width', w / magnitude.length - padding)
+      .attr('height', d => d * 4)
+      .attr('fill', 'steelblue');
+
+    svg
+      .selectAll('text')
+      .data(magnitude)
+      .enter()
+      .append('text')
+      .text(d => d)
+      .attr(
+        'x',
+        (d, i) =>
+          i * (w / magnitude.length) + (w / magnitude.length - padding) / 2
+      )
+      .attr('y', d => h - d * 4 + 20);
 
     return div.toReact();
   }
@@ -40,4 +54,4 @@ class AsteroidMap extends React.Component {
   }
 }
 
-export default AsteroidMap;
+export default MagnitudeBarGraph;

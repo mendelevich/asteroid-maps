@@ -1,5 +1,5 @@
 import FrequencyChart from './Examples/FrequencyChart';
-import AsteroidMap from './Examples/AsteroidMap';
+import MagnitudeBarGraph from './Examples/MagnitudeBarGraph';
 import testdata from './testdata';
 const React = require('react');
 
@@ -48,12 +48,12 @@ class Container extends React.Component {
     return (
       <div>
         <p>Hello world</p>
-        <FrequencyChart
+        {/* <FrequencyChart
           width={this.state.width}
           height={this.state.height}
           data={this.state.data}
         />
-        <AsteroidMap data={testdata} />
+        <MagnitudeBarGraph data={testdata} /> */}
       </div>
     );
   }
