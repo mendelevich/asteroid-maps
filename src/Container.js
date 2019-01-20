@@ -47,12 +47,12 @@ class Container extends React.Component {
   render() {
     return (
       <div>
-        <p>Hello world</p>
-        <FrequencyChart
+        <h1>Asteroids passing by on 09/08/2015</h1>
+        {/* <FrequencyChart
           width={this.state.width}
           height={this.state.height}
           data={this.state.data}
-        />
+        /> */}
         <AsteroidMap data={testdata} />
       </div>
     );
