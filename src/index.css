@@ -32,3 +32,61 @@ h1 {
 .axisWhite path {
   stroke: white;
 }
+
+label {
+  color: white;
+}
+
+.intro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intro-container h1 {
+  font-family: 'Sarabun', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.intro-nasa {
+  color: white;
+  width: 800px;
+  font-family: 'Sarabun', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.header p {
+  padding: 0 20px 0 20px;
+}
+
+.header-left {
+  font-family: 'Sarabun', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 20pt;
+}
+
+.header-right {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.input-date {
+  padding-top: 50px;
+}
+
+.graph-info {
+  color: white;
+  font-style: italic;
+}
+
+.pink-text {
+  color: #dc6acf;
+}

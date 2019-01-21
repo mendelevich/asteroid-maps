@@ -5,10 +5,10 @@ const d3 = require('d3');
 class AsteroidMap extends React.Component {
   drawChart() {
     const div = new ReactFauxDOM.createElement('div');
-
     let data = this.props.data;
 
-    const nearEarthObjects = data.near_earth_objects['2015-09-08'];
+    const neoDate = Object.keys(data.near_earth_objects)[0];
+    const nearEarthObjects = data.near_earth_objects[neoDate];
 
     const diameterKm = nearEarthObjects.map(x => {
       const dataObj = {
@@ -24,7 +24,8 @@ class AsteroidMap extends React.Component {
 
     const closeApproach = nearEarthObjects.map(x => {
       const dataObj = {
-        missDistanceKm: x.close_approach_data[0].miss_distance.kilometers,
+        missDistanceKm:
+          x.close_approach_data[0].miss_distance.kilometers / 1000000,
         name: x.name,
         potentialHazard: x.is_potentially_hazardous_asteroid,
       };
@@ -32,8 +33,8 @@ class AsteroidMap extends React.Component {
       return dataObj;
     });
 
-    const width = 960;
-    const height = 500;
+    const width = 1000;
+    const height = 300;
 
     const scaleDist = d3
       .scaleLinear()
@@ -110,9 +111,16 @@ class AsteroidMap extends React.Component {
 
     svg
       .append('g')
-      .attr('transform', 'translate(0,350)')
+      .attr('transform', `translate(0,${height - 50})`)
       .attr('class', 'axisWhite')
       .call(xAxis);
+
+    svg
+      .append('text')
+      .attr('transform', 'translate(' + width / 2 + ' ,' + height + ')')
+      .style('text-anchor', 'middle')
+      .style('fill', 'white')
+      .text('Miss distance (10⁶ km)');
 
     return div.toReact();
   }

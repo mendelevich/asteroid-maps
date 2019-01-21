@@ -1,59 +1,93 @@
-import FrequencyChart from './Examples/FrequencyChart';
-import AsteroidMap from './Examples/AsteroidMap';
-import testdata from './testdata';
+import AsteroidMap from './AsteroidMap';
+import defaultData from './defaultData';
+import getData from './getNasaApi';
+import About from './About';
+import Header from './Header';
 const React = require('react');
+
+// TODO: Load data from today's date automatically
+// TODO: Add information on hover over
+// TODO: Animation of elements
+// TODO: About segement
+
+// TODO: Search and show data for specific NEO
+
+// TODO: Styling of buttons
+// TODO: Organize files
 
 class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.getInitialState();
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleAbout = this.toggleAbout.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ date: event.target.value });
+  }
+
+  async handleSubmit(event) {
+    const newData = await getData(this.state.date);
+    const viewDate = Object.keys(newData.near_earth_objects)[0];
+
+    this.setState({ neoData: newData, viewDate });
+  }
+
+  toggleAbout(event) {
+    this.setState({ viewAbout: !this.state.viewAbout });
   }
 
   getInitialState() {
+    const today = new Date();
+    const day = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
+    const month =
+      today.getMonth() + 1 < 10
+        ? `0${today.getMonth() + 1}`
+        : today.getMonth() + 1;
+    const year = today.getFullYear();
+    const formattedDate = `${year}-${month}-${day}`;
+    const viewDate = Object.keys(defaultData.near_earth_objects)[0];
+
     return {
-      width: 960,
-      height: 600,
-      data: [
-        { letter: 'A', frequency: 0.08167 },
-        { letter: 'B', frequency: 0.01492 },
-        { letter: 'C', frequency: 0.0278 },
-        { letter: 'D', frequency: 0.04253 },
-        { letter: 'E', frequency: 0.12702 },
-        { letter: 'F', frequency: 0.02288 },
-        { letter: 'G', frequency: 0.02022 },
-        { letter: 'H', frequency: 0.06094 },
-        { letter: 'I', frequency: 0.06973 },
-        { letter: 'J', frequency: 0.00153 },
-        { letter: 'K', frequency: 0.00747 },
-        { letter: 'L', frequency: 0.04025 },
-        { letter: 'M', frequency: 0.02517 },
-        { letter: 'N', frequency: 0.06749 },
-        { letter: 'O', frequency: 0.07507 },
-        { letter: 'P', frequency: 0.01929 },
-        { letter: 'Q', frequency: 0.00098 },
-        { letter: 'R', frequency: 0.05987 },
-        { letter: 'S', frequency: 0.06333 },
-        { letter: 'T', frequency: 0.09056 },
-        { letter: 'U', frequency: 0.02758 },
-        { letter: 'V', frequency: 0.01037 },
-        { letter: 'W', frequency: 0.02465 },
-        { letter: 'X', frequency: 0.0015 },
-        { letter: 'Y', frequency: 0.01971 },
-        { letter: 'Z', frequency: 0.00074 },
-      ],
+      neoData: defaultData,
+      date: formattedDate,
+      viewDate,
+      viewAbout: true,
     };
   }
 
   render() {
     return (
       <div>
-        <h1>Asteroids passing by on 09/08/2015</h1>
-        {/* <FrequencyChart
-          width={this.state.width}
-          height={this.state.height}
-          data={this.state.data}
-        /> */}
-        <AsteroidMap data={testdata} />
+        <Header />
+        {/* {this.state.viewAbout ? <About toggleAbout={this.toggleAbout} /> : ''} */}
+
+        <div>
+          <h1>Asteroids near earth on {this.state.viewDate}</h1>
+          <p className="graph-info">
+            Size of circle corresponds to relative size of NEO. <br />
+            <span className="pink-text">Pink</span> circles signify NEOs listed
+            as "potential hazards".
+          </p>
+          <AsteroidMap data={this.state.neoData} />
+          <div className="input-date">
+            <label htmlFor="start">Search on:</label>
+            <br />
+            <input
+              type="date"
+              id="start"
+              name="trip-start"
+              value={this.state.date}
+              min="1900-01-01"
+              max="2200-12-31"
+              onChange={this.handleChange}
+            />
+            <br />
+            <button onClick={this.handleSubmit}>Submit</button>
+          </div>
+        </div>
       </div>
     );
   }
