@@ -5,12 +5,10 @@ const d3 = require('d3');
 class AsteroidMap extends React.Component {
   drawChart() {
     const div = new ReactFauxDOM.createElement('div');
-    let data = this.props.data;
+    let neoData = this.props.neoData;
 
-    const neoDate = Object.keys(data.near_earth_objects)[0];
-    const nearEarthObjects = data.near_earth_objects[neoDate];
-
-    console.log(data);
+    const neoDate = Object.keys(neoData.near_earth_objects)[0];
+    const nearEarthObjects = neoData.near_earth_objects[neoDate];
 
     const diameterKm = nearEarthObjects.map(x => {
       const dataObj = {
@@ -52,14 +50,9 @@ class AsteroidMap extends React.Component {
         d3.min(diameterKm, d => +d.diameter),
         d3.max(diameterKm, d => +d.diameter),
       ])
-      .range([2, 15]);
+      .range([5, 20]);
 
     const xAxis = d3.axisBottom(scaleDist);
-
-    d3.select('body')
-      .transition()
-      .duration(2000)
-      .style('background-color', '#0D2149');
 
     const tooltip = d3
       .select('body')
@@ -94,6 +87,10 @@ class AsteroidMap extends React.Component {
       .attr('fill', d =>
         d.is_potentially_hazardous_asteroid ? '#DC6ACF' : 'white'
       )
+      .attr('stroke', d =>
+        d.is_potentially_hazardous_asteroid ? 'none' : '#646464'
+      )
+      .attr('opacity', d => 0.7)
       .on('mouseover', d => {
         tooltip
           .transition()
@@ -109,7 +106,14 @@ class AsteroidMap extends React.Component {
           .transition()
           .duration(500)
           .style('opacity', 0)
-      );
+      )
+      .on('click', d => {
+        this.props.selectNeo(d.id);
+        tooltip
+          .transition()
+          .duration(500)
+          .style('opacity', 0);
+      });
 
     svg
       .append('g')

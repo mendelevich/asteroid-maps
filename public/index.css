@@ -5,8 +5,44 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  background-color: #0d2149;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-animation: fadein 2s;
+}
+
+@keyframes fadein {
+  from {
+    background-color: white;
+  }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from {
+    background-color: white;
+  }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from {
+    background-color: white;
+  }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from {
+    background-color: white;
+  }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+  from {
+    background-color: white;
+  }
 }
 
 code {
@@ -104,4 +140,28 @@ label {
 
 .header-icon {
   height: 40px;
+}
+
+.svg-table-container {
+  display: flex;
+}
+
+table {
+  background-color: #39496a;
+  height: 300px;
+  overflow-y: scroll;
+  display: block;
+  padding: 15px;
+  color: #a7aebc;
+  text-align: center;
+  font-family: 'Sarabun', sans-serif;
+}
+
+tbody .left-align-table {
+  text-align: left;
+}
+
+.selected-tr {
+  color: #0d2149;
+  font-weight: 700;
 }
