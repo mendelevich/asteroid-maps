@@ -1,4 +1,5 @@
 body {
+  text-align: center;
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -60,22 +61,32 @@ label {
   justify-content: space-between;
   align-items: center;
   color: white;
-}
-
-.header p {
-  padding: 0 20px 0 20px;
+  background-color: #09152f;
+  padding: 5px 0 5px 0px;
 }
 
 .header-left {
+  display: flex;
+  justify-content: space-evenly;
   font-family: 'Sarabun', sans-serif;
   font-weight: 700;
   font-style: italic;
   font-size: 20pt;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.header-left > div {
+  padding-left: 5px;
 }
 
 .header-right {
   display: flex;
   justify-content: space-evenly;
+}
+
+.header-right > div {
+  padding: 0px 10px 0px 10px;
 }
 
 .input-date {
@@ -89,4 +100,8 @@ label {
 
 .pink-text {
   color: #dc6acf;
+}
+
+.header-icon {
+  height: 40px;
 }

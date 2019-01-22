@@ -1,8 +1,7 @@
-import AsteroidMap from './AsteroidMap';
-import defaultData from './defaultData';
-import getData from './getNasaApi';
-import About from './About';
-import Header from './Header';
+import AsteroidMap from './components/svg/AsteroidMap';
+import defaultData from './data/defaultData';
+import getData from './api/getNasaApi';
+import About from './components/About';
 const React = require('react');
 
 // TODO: Load data from today's date automatically
@@ -13,7 +12,6 @@ const React = require('react');
 // TODO: Search and show data for specific NEO
 
 // TODO: Styling of buttons
-// TODO: Organize files
 
 class Container extends React.Component {
   constructor(props) {
@@ -61,7 +59,6 @@ class Container extends React.Component {
   render() {
     return (
       <div>
-        <Header />
         {/* {this.state.viewAbout ? <About toggleAbout={this.toggleAbout} /> : ''} */}
 
         <div>

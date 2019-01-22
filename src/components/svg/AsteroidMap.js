@@ -10,6 +10,8 @@ class AsteroidMap extends React.Component {
     const neoDate = Object.keys(data.near_earth_objects)[0];
     const nearEarthObjects = data.near_earth_objects[neoDate];
 
+    console.log(data);
+
     const diameterKm = nearEarthObjects.map(x => {
       const dataObj = {
         diameter:

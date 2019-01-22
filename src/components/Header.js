@@ -3,11 +3,12 @@ const React = require('react');
 const Header = props => (
   <div className="header">
     <div className="header-left">
-      <p>Asteroid Maps</p>
+      <img alt="asteroid icon" src="/asteroid.png" className="header-icon" />
+      <div>Asteroid Maps</div>
     </div>
     <div className="header-right">
-      <p>About NEOs</p>
-      <p>NASA's website</p>
+      <div>About NEOs</div>
+      <div>NASA's website</div>
     </div>
   </div>
 );
