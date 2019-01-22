@@ -1,8 +1,10 @@
 import AsteroidMap from './components/svg/AsteroidMap';
-import defaultData from './data/defaultData';
+import defaultData from './data/defaultDateData';
 import getData from './api/getDateApi';
 import About from './components/About';
 import AsteroidTable from './components/svg/AsteroidTable';
+import SingleNeoLineGraph from './components/svg/SingleNeoLineGraph';
+import SingleNeoTable from './components/svg/SingleNeoTable';
 const React = require('react');
 
 // TODO: Add information on hover over
@@ -30,14 +32,14 @@ class Container extends React.Component {
     this.selectNeo = this.selectNeo.bind(this);
   }
 
-  // async componentDidMount() {
-  //   try {
-  //     const todaysData = await this.getInitialState();
-  //     this.setState(todaysData);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+  async componentDidMount() {
+    try {
+      const todaysData = await this.getInitialState();
+      this.setState(todaysData);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   changeDate(event) {
     this.setState({ date: event.target.value });
@@ -104,6 +106,7 @@ class Container extends React.Component {
               <AsteroidMap
                 neoData={this.state.neoData}
                 selectNeo={this.selectNeo}
+                selectedNeo={this.state.selectedNeo}
               />
               <AsteroidTable
                 neoData={this.state.neoData}
@@ -125,6 +128,10 @@ class Container extends React.Component {
               />
               <button onClick={this.selectDate}>Submit</button>
               <button onClick={this.selectToday}>Today</button>
+            </div>
+            <div>
+              <SingleNeoLineGraph />
+              <SingleNeoTable />
             </div>
           </div>
         )}

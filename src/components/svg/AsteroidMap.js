@@ -33,7 +33,7 @@ class AsteroidMap extends React.Component {
       return dataObj;
     });
 
-    const width = 1000;
+    const width = 960;
     const height = 300;
 
     const scaleDist = d3
@@ -76,6 +76,7 @@ class AsteroidMap extends React.Component {
       .attr('width', width)
       .attr('height', height);
 
+    // Add circles
     const nodes = svg
       .selectAll('circle')
       .data(nearEarthObjects)
@@ -84,6 +85,9 @@ class AsteroidMap extends React.Component {
       .attr('cx', (d, i) => scaleDist(closeApproach[i].missDistanceKm))
       .attr('cy', () => height / 2)
       .attr('r', (d, i) => scaleRadius(diameterKm[i].diameter))
+      .attr('class', d =>
+        d.id === this.props.selectedNeo ? 'selected-circle' : ''
+      )
       .attr('fill', d =>
         d.is_potentially_hazardous_asteroid ? '#DC6ACF' : 'white'
       )
@@ -115,12 +119,14 @@ class AsteroidMap extends React.Component {
           .style('opacity', 0);
       });
 
+    // add xAxis
     svg
       .append('g')
-      .attr('transform', `translate(0,${height - 50})`)
+      .attr('transform', `translate(0,${height - 40})`)
       .attr('class', 'axisWhite')
       .call(xAxis);
 
+    // xAxis label
     svg
       .append('text')
       .attr('transform', 'translate(' + width / 2 + ' ,' + height + ')')

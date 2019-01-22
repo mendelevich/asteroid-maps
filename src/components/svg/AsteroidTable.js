@@ -32,7 +32,9 @@ const AsteroidTable = props => {
             className={neo.id === props.selectedNeo ? 'selected-tr' : ''}
           >
             <td className="left-align-table">{neo.name}</td>
-            <td className="left-align-table">{neo.id}</td>
+            <td className="left-align-table">
+              <a href={neo.nasa_jpl_url}>{neo.id}</a>
+            </td>
             <td>{calculateAverage(neo)}</td>
             <td>{neo.is_potentially_hazardous_asteroid ? 'Yes' : 'No'}</td>
           </tr>

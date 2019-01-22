@@ -1,4 +1,4 @@
-const defaultData = {
+const defaultDateData = {
   // 20190120185350
   // https://api.nasa.gov/neo/rest/v1/feed?start_date=2019-01-20&end_date=2019-01-20&api_key=DEMO_KEY
 
@@ -353,4 +353,4 @@ const defaultData = {
   },
 };
 
-export default defaultData;
+module.exports = defaultDateData;
